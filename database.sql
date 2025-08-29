@@ -1,0 +1,24 @@
+CREATE DATABASE flashcards_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE flashcards_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE sets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE flashcards (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    set_id INT NOT NULL,
+    term VARCHAR(255) NOT NULL,
+    definition VARCHAR(255) NOT NULL,
+    FOREIGN KEY (set_id) REFERENCES sets(id) ON DELETE CASCADE
+);
