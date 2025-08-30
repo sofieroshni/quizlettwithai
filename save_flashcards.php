@@ -19,5 +19,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             $st->execute();
         }
     }
-    header("Location: flashcards.php");
+    
+    header("Location: play.php?id=$set_id");
+exit();
+
 }
